@@ -57,8 +57,7 @@ public class Enemy : MonoBehaviour
         HP -= damage;
         if (HP <= 0)
         {
-            //GameManager.master.addCoins(coinWorth);
-            //health = maxHealth;
+            GameManager.manager.addCoins(drops);
             Destroy(this.gameObject);
         }
     }

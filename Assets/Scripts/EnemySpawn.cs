@@ -22,6 +22,7 @@ public class EnemySpawn : MonoBehaviour
         done[type] = new bool();
         for (int i = 0; i < enemyWave.groups.Length; i++)
         {
+            Debug.Log("spawn");
             if (enemyWave.groups[i].enemies.Length > type) StartCoroutine(SpawnEnemy(enemyWave.groups[i].enemies[type]));
 
 
@@ -30,7 +31,7 @@ public class EnemySpawn : MonoBehaviour
 
         done[type] = true;
         Debug.Log("done with wave");
-        //GameManager.master.CheckForEnemies();
+        GameManager.manager.checkEnemies();
     }
 
     IEnumerator SpawnEnemy(Type type)
