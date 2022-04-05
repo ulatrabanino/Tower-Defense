@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MouseDestroy : MonoBehaviour
 {
+    public GameObject tower;
+    public GameObject plane;
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +22,12 @@ public class MouseDestroy : MonoBehaviour
                 {
                     boxCollider.gameObject.GetComponent<Enemy>().onHit(1);
                     Debug.Log("Ouch!");
+                }
+                if(boxCollider.tag == "EmptyLot" && GameManager.manager.coinAmount >= 10)
+                {
+                    GameManager.manager.addCoins(-10);
+                    boxCollider.transform.gameObject.SetActive(false);
+                    Instantiate(tower, boxCollider.transform.position, Quaternion.identity, plane.transform);
                 }
             }
         }

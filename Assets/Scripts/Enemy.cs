@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class Enemy : MonoBehaviour
     private Waypoint[] enemyPath;
 
     public int drops;
+    public Image hpBar;
     public float maxHP;
     private float HP;
     public float speed = 3f;
@@ -15,6 +18,8 @@ public class Enemy : MonoBehaviour
     private int index = 0;
     private Vector3 nextPoint;
     private bool stop = false;
+
+    public UnityEvent death;
 
     // Start is called before the first frame update
     void Start()
@@ -55,8 +60,11 @@ public class Enemy : MonoBehaviour
     public void onHit(float damage)
     {
         HP -= damage;
+        hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(50 * (HP / maxHP), 10);
         if (HP <= 0)
         {
+            death.Invoke();
+            death.RemoveAllListeners();
             GameManager.manager.addCoins(drops);
             Destroy(this.gameObject);
         }
