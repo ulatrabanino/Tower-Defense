@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     private bool stop = false;
 
     public UnityEvent death;
+    public AudioClip deathClip;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +67,13 @@ public class Enemy : MonoBehaviour
             death.Invoke();
             death.RemoveAllListeners();
             GameManager.manager.addCoins(drops);
-            Destroy(this.gameObject);
+            AudioSource.PlayClipAtPoint(deathClip, transform.position);
+            Destroy(this.gameObject,1);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("ant ow");
     }
 }
