@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {

@@ -1,21 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class King : MonoBehaviour
 {
     public float maxHP;
     private float HP;
+
+    public GameObject restart;
     // Start is called before the first frame update
     void Start()
     {
         HP = maxHP;
+        restart.gameObject.SetActive(false);
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider collision)
     {
         Debug.Log("ow");
-        if (collision.collider.tag == "Enemy")
+        if (collision.tag == "Enemy")
         {
             OnHit(1);
         }
@@ -25,7 +30,8 @@ public class King : MonoBehaviour
         HP -= damage;
         if(HP <= 0)
         {
-            Destroy(this.gameObject);
+            restart.gameObject.SetActive(true);
+            Destroy(this.gameObject,1);
         }
     }
 }

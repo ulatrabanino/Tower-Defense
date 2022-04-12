@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager manager;
     public EnemySpawn enemyManager;
     public TMP_Text coins;
+    public TMP_Text win;
 
     public int coinAmount = 0;
 
@@ -18,6 +19,12 @@ public class GameManager : MonoBehaviour
     {
         manager = this;
         this.coins.text = "Coins: " + coinAmount;
+        this.win.text = "";
+    }
+
+    private void Update()
+    {
+        checkEnemies();
     }
 
     public void addCoins(int num)
@@ -50,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
+        this.win.text = "You won!";
+        Debug.Log("done!");
         pauseGame();
     }
 }
